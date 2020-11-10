@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Share+Tech+Mono&display=swap");
+/* Color Theme Swatches in Hex */
+$Smart-Diffuser-App-1-hex: #bfbfbf;
+$Smart-Diffuser-App-2-hex: #595646;
+$Smart-Diffuser-App-3-hex: #a6a397;
+$Smart-Diffuser-App-4-hex: #f2f2f2;
+$Smart-Diffuser-App-5-hex: #0d0d0d;
+
+$content: "Share Tech Mono", monospace;
+$editor: "Barlow", sans-serif;
+body {
+  background-color: $Smart-Diffuser-App-1-hex;
+}
+
+#layout {
+  max-width: 1300px;
+  margin: 0 auto;
+  min-height: 500px;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 0;
+  font-family: $content;
+}
+
+.horizontal-layout {
+  grid-template-areas:
+    "sideHeader header"
+    "side content";
+  grid-template-columns: 400px minmax(600px, 900px);
+  grid-template-rows: 32px 1fr;
+}
+
+@mixin vertical-layout {
+  grid-template-areas: "sideHeader" "side" "." "header" "content";
+  max-width: 95%;
+  margin: 0 auto;
+  min-height: 500px;
+  display: grid;
+  grid-template-columns: minmax(200px, 800px);
+  grid-template-rows: 32px minmax(200px, auto) 32px auto;
+  justify-content: center;
+}
+.vertical-layout {
+  @include vertical-layout();
+}
+@mixin window-shadow {
+  box-shadow: 0 1px 6px 2px #00000091;
+}
+#editor {
+  padding: 10px;
+  border: 1px solid $Smart-Diffuser-App-2-hex;
+  border-top: none;
+  color: $Smart-Diffuser-App-5-hex;
+  background-color: $Smart-Diffuser-App-4-hex;
+  outline: none;
+  -moz-appearance: none;
+  grid-area: side;
+  font-family: $editor;
+  font-size: 1rem;
+  @include window-shadow();
+  resize: vertical;
+}
+
+#preview {
+  padding: 10px;
+  border: 1px solid $Smart-Diffuser-App-2-hex;
+  border-top: none;
+  color: $Smart-Diffuser-App-5-hex;
+  background-color: $Smart-Diffuser-App-4-hex;
+  grid-area: content;
+  @include window-shadow();
+}
+
+.header {
+  border: 1px solid $Smart-Diffuser-App-5-hex;
+  background-color: $Smart-Diffuser-App-3-hex;
+  box-shadow: 0px 4px 3px 0px #00000091;
+  @include window-shadow();
+  text-shadow: 2px 2px 3px #00000042;
+
+  border-bottom-style: none;
+  padding: 3px 10px 3px 7px;
+  display: flex;
+  align-items: center;
+  font-family: $content;
+  font-size: 1.2rem;
+  position: relative;
+  i {
+    margin-right: 5px;
+  }
+}
+
+.header.side {
+  grid-area: sideHeader;
+  i.fa-edit {
+    position: relative;
+    top: -2px;
+  }
+  #layout-changer {
+    position: absolute;
+    right: 3px;
+    font-size: 1.3rem;
+    padding: 2px 3px;
+    // border: 1px solid $Smart-Diffuser-App-2-hex;
+    // background: $Smart-Diffuser-App-1-hex;
+    // color: $Smart-Diffuser-App-5-hex;
+  }
+}
+
+.header.content {
+  grid-area: header;
+  i {
+    font-size: 1.4rem;
+  }
+}
+
+pre {
+  background-color: $Smart-Diffuser-App-1-hex;
+  padding: 5px;
+}
+
+th,
+td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+@media (max-width: 1000px) {
+  #layout {
+    @include vertical-layout();
+  }
+}
